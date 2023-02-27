@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float step = 0.5f;
     [SerializeField] GameObject bodyPrefab;
     [SerializeField] Transform[] bodies;
-    bool changeVal;
+    bool waiting;
     int length;
     int count;
     void Awake()
@@ -22,21 +22,24 @@ public class PlayerMovement : MonoBehaviour
     {
         newDirection = Vector3.right;
         bodies = GetComponentsInChildren<Transform>();
-        if (bodies.Length < 1)
+        length = bodies.Length;
+        if (length < 1)
         {
             Debug.LogError("No body segments found");
             return;
         }
         count = 1;
+        waiting = true;
         StartCoroutine(MoveHead());
     }
     IEnumerator MoveHead()
     {
         while (true)
         {
-            Vector3[] oldPositions = new Vector3[bodies.Length];
-            Debug.Log("Updating Values!");
-            for (int i = 0; i < bodies.Length; i++)
+            waiting = true;
+            Vector3[] oldPositions = new Vector3[length];
+            // Debug.Log("Updating Values!");
+            for (int i = 0; i < length; i++)
             {
                 oldPositions[i] = bodies[i].position;
             }
@@ -45,17 +48,18 @@ public class PlayerMovement : MonoBehaviour
             headPos += new Vector3(step * newDirection.x, step * newDirection.y, 0);
             bodies[1].position = headPos;
 
-            for (int i = 2; i < bodies.Length; i++)
+            for (int i = 2; i < length; i++)
             {
                 if (bodies[i] != null && oldPositions[i - 1] != null)
                     MoveBody(i, oldPositions[i - 1]);
             }
+            waiting = false;
             yield return new WaitForSeconds(speed);
         }
     }
     void MoveBody(int index, Vector3 prevPos)
     {
-        Debug.Log("Index: " + index + " Current position : " + bodies[index].transform.position + " New position : " + prevPos);
+        // Debug.Log("Index: " + index + " Current position : " + bodies[index].transform.position + " New position : " + prevPos);
         bodies[index].transform.position = prevPos;
     }
     void Update()
@@ -76,9 +80,19 @@ public class PlayerMovement : MonoBehaviour
         {
             newDirection = Vector3.right;
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+            LevelManager.Instance.PauseGame();
+
     }
-    void OnCollisionEnter2D(Collision2D collision)
+    [ContextMenu("Add Body")]
+    public void AddBody()
     {
-        Debug.Log("Collided!");
+        Vector3 oldPos = bodies[length - 1].position;
+        Debug.Log(oldPos);
+        GameObject newBody = Instantiate(bodyPrefab, oldPos + new Vector3(step * newDirection.x, step * newDirection.y, 0), Quaternion.identity);
+        newBody.transform.parent = this.transform;
+        newBody.transform.SetAsLastSibling();
+        length++;
+        bodies = GetComponentsInChildren<Transform>();
     }
 }
