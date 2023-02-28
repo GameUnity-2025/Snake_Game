@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    private int score;
-    [SerializeField] PlayerMovement snake;
-    [SerializeField] CanvasController canvas;
     private static LevelManager instance = null;
     public static LevelManager Instance { get { return instance; } }
     private void Awake()
@@ -21,23 +19,20 @@ public class LevelManager : MonoBehaviour
             DontDestroyOnLoad(instance);
         }
     }
-    private void Start()
+    public void LoadSceneAtIndex(int index)
     {
-        score = 0;
-        canvas.UpdateScore(score);
+        SceneManager.LoadScene(index);
     }
-    public void FoodConsumed()
+    public void LoadMainMenu()
     {
-        score += 10;
-        snake.AddBody();
-        canvas.UpdateScore(score);
+        SceneManager.LoadScene(0);
     }
-    public void PauseGame()
+    public void ReloadCurrentLevel()
     {
-        canvas.PauseScreenTrigger();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-    public void GameOver()
+    public void QuitGame()
     {
-        canvas.GameOverEnable();
+        Application.Quit();
     }
 }
