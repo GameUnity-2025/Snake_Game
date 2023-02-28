@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 public class LevelManager : MonoBehaviour
 {
     private static LevelManager instance = null;
@@ -11,12 +8,12 @@ public class LevelManager : MonoBehaviour
     {
         if (instance != null)
         {
-            Destroy(instance);
+            Destroy(instance.gameObject);
         }
         else
         {
             instance = this;
-            DontDestroyOnLoad(instance);
+            DontDestroyOnLoad(instance.gameObject);
         }
     }
     public void LoadSceneAtIndex(int index)

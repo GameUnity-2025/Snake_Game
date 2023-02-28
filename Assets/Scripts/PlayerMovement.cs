@@ -1,12 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 public class PlayerMovement : MonoBehaviour
 {
     Vector3 newDirection;
     Vector3 headPos;
-    [SerializeField] float speed = 0.5f;
+    [SerializeField] float timeStep = 0.5f;
     [SerializeField] float step = 0.5f;
     [SerializeField] GameObject bodyPrefab;
     [SerializeField] Transform[] bodies;
@@ -15,7 +13,6 @@ public class PlayerMovement : MonoBehaviour
     {
         length = -1;
     }
-
     void Start()
     {
         newDirection = Vector3.right;
@@ -47,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
                 if (bodies[i] != null && oldPositions[i - 1] != null)
                     MoveBody(i, oldPositions[i - 1]);
             }
-            yield return new WaitForSeconds(speed);
+            yield return new WaitForSeconds(timeStep);
         }
     }
     void MoveBody(int index, Vector3 prevPos)
@@ -73,6 +70,11 @@ public class PlayerMovement : MonoBehaviour
             newDirection = Vector3.right;
         }
     }
+    public Transform[] GetBodiesTransform()
+    {
+        bodies = GetComponentsInChildren<Transform>();
+        return bodies;
+    }
     [ContextMenu("Add Body")]
     public void AddBody()
     {
@@ -81,7 +83,10 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator AddBodyWaiter()
     {
         Vector3 currentDirection = newDirection;
-        yield return new WaitForSeconds(speed * (length - 1));
+        Debug.Log("Time to wait : " + (timeStep * (length - 1)));
+        Debug.Log(Time.time);
+        yield return new WaitForSeconds(timeStep * (length - 1));
+        Debug.Log(Time.time);
         Vector3 oldPos = bodies[length - 1].position;
         GameObject newBody = Instantiate(bodyPrefab, oldPos + new Vector3(step * currentDirection.x, step * currentDirection.y, 0), Quaternion.identity);
         newBody.transform.parent = this.transform;

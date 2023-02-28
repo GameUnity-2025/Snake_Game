@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 public class GameManager : MonoBehaviour
 {
-    // Controls game flow, canvas
     [SerializeField] PlayerMovement snake;
     [SerializeField] CanvasController canvas;
+    [SerializeField] CollectiblesController collectibles;
     int score;
     void Start()
     {
@@ -18,6 +15,7 @@ public class GameManager : MonoBehaviour
         score += 10;
         snake.AddBody();
         canvas.UpdateScore(score);
+        collectibles.SpawnFood();
     }
     public void PauseGameTrigger()
     {
@@ -43,5 +41,9 @@ public class GameManager : MonoBehaviour
         if (Time.timeScale == 0)
             Time.timeScale = 1;
         LevelManager.Instance.ReloadCurrentLevel();
+    }
+    public void ExitGame()
+    {
+        LevelManager.Instance.QuitGame();
     }
 }
