@@ -421,7 +421,7 @@ GameObject:
   - component: {fileID: 245825898}
   - component: {fileID: 245825899}
   m_Layer: 5
-  m_Name: MusicVolume
+  m_Name: MenuVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -504,7 +504,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1090495205}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
-        m_MethodName: SetMusicVolume
+        m_MethodName: SetMenuVolume
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2213,7 +2213,7 @@ GameObject:
   - component: {fileID: 1048171601}
   - component: {fileID: 1048171600}
   m_Layer: 0
-  m_Name: MusicAudio
+  m_Name: UIAudio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2772,7 +2772,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: MUSIC VOLUME
+  m_text: MENU VOLUME
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 04d2d7b3e5d51e9488cb45e3711e9ffe, type: 2}
   m_sharedMaterial: {fileID: 4519581402563193277, guid: 04d2d7b3e5d51e9488cb45e3711e9ffe, type: 2}
@@ -3307,13 +3307,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b36a91782d1f284f99b201eba2a59ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSourceMenu: {fileID: 1048171600}
   audioSourceFx: {fileID: 1667580417}
-  audioSourceMusic: {fileID: 1048171600}
   sounds:
   - soundType: 0
-    audioClip: {fileID: 0}
+    audioClip: {fileID: 8300000, guid: 9ea15dd942f2bd0449249b983f864bcc, type: 3}
   - soundType: 1
-    audioClip: {fileID: 0}
+    audioClip: {fileID: 8300000, guid: e6cc80447488df2429df0b036fe5fe30, type: 3}
+  - soundType: 2
+    audioClip: {fileID: 8300000, guid: 6fd717caf76845148974106e49b4bb9b, type: 3}
 --- !u!4 &1383536911
 Transform:
   m_ObjectHideFlags: 0

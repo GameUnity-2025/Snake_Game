@@ -2,8 +2,8 @@ using System;
 using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
+    [SerializeField] AudioSource audioSourceMenu;
     [SerializeField] AudioSource audioSourceFx;
-    [SerializeField] AudioSource audioSourceMusic;
     public Sound[] sounds;
     private static AudioManager instance = null;
     public static AudioManager Instance { get { return instance; } }
@@ -26,11 +26,13 @@ public class AudioManager : MonoBehaviour
         switch (soundType)
         {
             case SoundType.Button:
+                audioSourceMenu.PlayOneShot(sound.audioClip);
+                break;
+            case SoundType.Food:
                 audioSourceFx.PlayOneShot(sound.audioClip);
                 break;
-            case SoundType.BGMusic:
-                audioSourceMusic.clip = sound.audioClip;
-                audioSourceMusic.Play();
+            case SoundType.GameOver:
+                audioSourceFx.PlayOneShot(sound.audioClip);
                 break;
         }
     }
@@ -42,18 +44,18 @@ public class AudioManager : MonoBehaviour
     {
         audioSourceFx.volume = _volume;
     }
-    public float GetMusicVolume()
+    public float GetMenuVolume()
     {
-        return audioSourceMusic.volume;
+        return audioSourceMenu.volume;
     }
-    public void SetMusicVolume(float _volume)
+    public void SetMenuVolume(float _volume)
     {
-        audioSourceMusic.volume = _volume;
+        audioSourceMenu.volume = _volume;
     }
 }
 public enum SoundType
 {
-    Button, BGMusic
+    Button, Food, GameOver
 }
 [Serializable]
 public class Sound
