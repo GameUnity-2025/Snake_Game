@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class BodyController : MonoBehaviour
 {
+    [SerializeField] GameManager gameManager;
     void OnTriggerEnter2D(Collider2D col)
     {
         switch (col.tag)
         {
             case "SnakeBody":
                 Debug.Log("Collision with snake body!");
-                LevelManager.Instance.GameOver();
+                gameManager.GameOver();
                 break;
             case "Food":
                 Destroy(col.gameObject);
-                LevelManager.Instance.FoodConsumed();
+                gameManager.FoodConsumed();
                 break;
             case "Walls":
                 Debug.Log("Collided with wall!");
-                LevelManager.Instance.GameOver();
+                gameManager.GameOver();
                 break;
             default: break;
         }

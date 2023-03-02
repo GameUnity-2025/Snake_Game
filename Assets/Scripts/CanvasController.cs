@@ -1,33 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
 public class CanvasController : MonoBehaviour
 {
     [SerializeField] TMP_Text scoreText;
     [SerializeField] GameObject gameOverUI;
+    [SerializeField] TMP_Text gameOverScore;
     [SerializeField] GameObject pauseScreenUI;
     public void UpdateScore(int _score)
     {
         scoreText.text = _score.ToString();
     }
-    public void GameOverEnable()
+    public void GameOverUI()
     {
-        Time.timeScale = 0;
+        gameOverScore.text = scoreText.text;
         gameOverUI.SetActive(true);
     }
-    public void PauseScreenTrigger()
+    public void PauseScreenUI()
     {
         if (pauseScreenUI.activeInHierarchy)
         {
             pauseScreenUI.SetActive(false);
-            Time.timeScale = 1;
         }
         else
         {
             pauseScreenUI.SetActive(true);
-            Time.timeScale = 0;
         }
     }
 }
