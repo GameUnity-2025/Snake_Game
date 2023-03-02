@@ -1,7 +1,7 @@
 using UnityEngine;
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] PlayerMovement snake;
+    [SerializeField] PlayerMovement[] player;
     [SerializeField] CanvasController canvas;
     [SerializeField] CollectiblesController collectibles;
     int score;
@@ -12,13 +12,15 @@ public class GameManager : MonoBehaviour
     }
     public void FoodConsumed()
     {
+        AudioManager.Instance.PlaySound(SoundType.Food);
         score += 10;
-        snake.AddBody();
+        player[0].AddBody();
         canvas.UpdateScore(score);
         collectibles.SpawnFood();
     }
     public void PauseGameTrigger()
     {
+        AudioManager.Instance.PlaySound(SoundType.Button);
         if (Time.timeScale == 0)
             Time.timeScale = 1;
         else
@@ -27,23 +29,27 @@ public class GameManager : MonoBehaviour
     }
     public void GameOver()
     {
+        AudioManager.Instance.PlaySound(SoundType.GameOver);
         Time.timeScale = 0;
         canvas.GameOverUI();
     }
     public void MainMenu()
     {
+        AudioManager.Instance.PlaySound(SoundType.Button);
         if (Time.timeScale == 0)
             Time.timeScale = 1;
         LevelManager.Instance.LoadMainMenu();
     }
     public void RestartLevel()
     {
+        AudioManager.Instance.PlaySound(SoundType.Button);
         if (Time.timeScale == 0)
             Time.timeScale = 1;
         LevelManager.Instance.ReloadCurrentLevel();
     }
     public void ExitGame()
     {
+        AudioManager.Instance.PlaySound(SoundType.Button);
         LevelManager.Instance.QuitGame();
     }
 }

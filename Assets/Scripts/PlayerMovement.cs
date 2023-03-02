@@ -1,5 +1,9 @@
 using System.Collections;
 using UnityEngine;
+public enum Player
+{
+    Player1, Player2
+}
 public class PlayerMovement : MonoBehaviour
 {
     Vector3 newDirection;
@@ -8,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float step = 0.5f;
     [SerializeField] GameObject bodyPrefab;
     [SerializeField] Transform[] bodies;
+    [SerializeField] Player player;
     int length;
     void Awake()
     {
@@ -15,7 +20,10 @@ public class PlayerMovement : MonoBehaviour
     }
     void Start()
     {
-        newDirection = Vector3.right;
+        if (player == Player.Player1)
+            newDirection = Vector3.right;
+        if (player == Player.Player2)
+            newDirection = Vector3.left;
         bodies = GetComponentsInChildren<Transform>();
         length = bodies.Length;
         if (length < 1)
@@ -53,21 +61,27 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W) && newDirection != Vector3.down)
+        if (player == Player.Player1)
         {
-            newDirection = Vector3.up;
+            if (Input.GetKeyDown(KeyCode.W) && newDirection != Vector3.down)
+                newDirection = Vector3.up;
+            else if (Input.GetKeyDown(KeyCode.S) && newDirection != Vector3.up)
+                newDirection = Vector3.down;
+            else if (Input.GetKeyDown(KeyCode.A) && newDirection != Vector3.right)
+                newDirection = Vector3.left;
+            else if (Input.GetKeyDown(KeyCode.D) && newDirection != Vector3.left)
+                newDirection = Vector3.right;
         }
-        else if (Input.GetKeyDown(KeyCode.S) && newDirection != Vector3.up)
+        if (player == Player.Player2)
         {
-            newDirection = Vector3.down;
-        }
-        else if (Input.GetKeyDown(KeyCode.A) && newDirection != Vector3.right)
-        {
-            newDirection = Vector3.left;
-        }
-        else if (Input.GetKeyDown(KeyCode.D) && newDirection != Vector3.left)
-        {
-            newDirection = Vector3.right;
+            if (Input.GetKeyDown(KeyCode.UpArrow) && newDirection != Vector3.down)
+                newDirection = Vector3.up;
+            else if (Input.GetKeyDown(KeyCode.DownArrow) && newDirection != Vector3.up)
+                newDirection = Vector3.down;
+            else if (Input.GetKeyDown(KeyCode.LeftArrow) && newDirection != Vector3.right)
+                newDirection = Vector3.left;
+            else if (Input.GetKeyDown(KeyCode.RightArrow) && newDirection != Vector3.left)
+                newDirection = Vector3.right;
         }
     }
     public Transform[] GetBodiesTransform()

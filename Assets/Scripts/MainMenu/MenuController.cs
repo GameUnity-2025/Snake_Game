@@ -6,6 +6,7 @@ public class MenuController : MonoBehaviour
     [SerializeField] GameObject SettingsMenu;
     public void StartClicked()
     {
+        AudioManager.Instance.PlaySound(SoundType.Button);
         MainMenu.alpha = 0.5f;
         MainMenu.interactable = false;
         if (!PlayMenu.activeInHierarchy)
@@ -13,6 +14,7 @@ public class MenuController : MonoBehaviour
     }
     public void SettingsClicked()
     {
+        AudioManager.Instance.PlaySound(SoundType.Button);
         MainMenu.alpha = 0.5f;
         MainMenu.interactable = false;
         if (!SettingsMenu.activeInHierarchy)
@@ -20,6 +22,7 @@ public class MenuController : MonoBehaviour
     }
     public void BackClicked()
     {
+        AudioManager.Instance.PlaySound(SoundType.Button);
         MainMenu.alpha = 1f;
         MainMenu.interactable = true;
         if (SettingsMenu.activeInHierarchy)
@@ -29,18 +32,20 @@ public class MenuController : MonoBehaviour
     }
     public void SinglePlayer()
     {
+        AudioManager.Instance.PlaySound(SoundType.Button);
         LevelManager.Instance.LoadSceneAtIndex(1);
     }
     public void ExitClicked()
     {
+        AudioManager.Instance.PlaySound(SoundType.Button);
         LevelManager.Instance.QuitGame();
     }
     public void SetSfxVolume(float _volume)
     {
         AudioManager.Instance.SetSfxVolume(_volume);
     }
-    public void SetMusicVolume(float _volume)
+    public void SetMenuVolume(float _volume)
     {
-        AudioManager.Instance.SetMusicVolume(_volume);
+        AudioManager.Instance.SetMenuVolume(_volume);
     }
 }
