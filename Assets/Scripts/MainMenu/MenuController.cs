@@ -35,6 +35,11 @@ public class MenuController : MonoBehaviour
         AudioManager.Instance.PlaySound(SoundType.Button);
         LevelManager.Instance.LoadSceneAtIndex(1);
     }
+    public void MultiPlayer()
+    {
+        AudioManager.Instance.PlaySound(SoundType.Button);
+        LevelManager.Instance.LoadSceneAtIndex(2);
+    }
     public void ExitClicked()
     {
         AudioManager.Instance.PlaySound(SoundType.Button);

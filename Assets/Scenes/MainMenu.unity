@@ -1173,7 +1173,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1090495205}
+        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+        m_MethodName: MultiPlayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &519523346
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3316,6 +3328,8 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: e6cc80447488df2429df0b036fe5fe30, type: 3}
   - soundType: 2
     audioClip: {fileID: 8300000, guid: 6fd717caf76845148974106e49b4bb9b, type: 3}
+  - soundType: 3
+    audioClip: {fileID: 8300000, guid: f64c4b53a0d94464f977c1479de80ef5, type: 3}
 --- !u!4 &1383536911
 Transform:
   m_ObjectHideFlags: 0

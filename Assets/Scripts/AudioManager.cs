@@ -23,18 +23,10 @@ public class AudioManager : MonoBehaviour
     public void PlaySound(SoundType soundType)
     {
         Sound sound = Array.Find(sounds, item => item.soundType == soundType);
-        switch (soundType)
-        {
-            case SoundType.Button:
-                audioSourceMenu.PlayOneShot(sound.audioClip);
-                break;
-            case SoundType.Food:
-                audioSourceFx.PlayOneShot(sound.audioClip);
-                break;
-            case SoundType.GameOver:
-                audioSourceFx.PlayOneShot(sound.audioClip);
-                break;
-        }
+        if (soundType == SoundType.Button)
+            audioSourceMenu.PlayOneShot(sound.audioClip);
+        else
+            audioSourceFx.PlayOneShot(sound.audioClip);
     }
     public float GetSfxVolume()
     {
@@ -55,7 +47,7 @@ public class AudioManager : MonoBehaviour
 }
 public enum SoundType
 {
-    Button, Food, GameOver
+    Button, Food, GameOver, PowerUp
 }
 [Serializable]
 public class Sound

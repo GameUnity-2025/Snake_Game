@@ -8,7 +8,8 @@ public class LevelManager : MonoBehaviour
     {
         if (instance != null)
         {
-            Destroy(instance.gameObject);
+            Destroy(this.gameObject);
+            return;
         }
         else
         {
