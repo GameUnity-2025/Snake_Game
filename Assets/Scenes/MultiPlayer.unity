@@ -5909,7 +5909,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1501821702206135137, guid: e882198a291eccc4e94454ba1739f27a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 1501821702206135137, guid: e882198a291eccc4e94454ba1739f27a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6456,22 +6456,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 88773567431496561, guid: b1c977f592b73d5489b4d8a9e0c01040, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -4.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2404195267726392962, guid: b1c977f592b73d5489b4d8a9e0c01040, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 8.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 2404195267726392962, guid: b1c977f592b73d5489b4d8a9e0c01040, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -8.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 2404195267726392962, guid: b1c977f592b73d5489b4d8a9e0c01040, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 3907747865225356374, guid: b1c977f592b73d5489b4d8a9e0c01040, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -6516,41 +6500,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4789804343454848754, guid: b1c977f592b73d5489b4d8a9e0c01040, type: 3}
-      propertyPath: m_Name
-      value: RightSquare
-      objectReference: {fileID: 0}
     - target: {fileID: 5973972327855402759, guid: b1c977f592b73d5489b4d8a9e0c01040, type: 3}
       propertyPath: m_Name
       value: Border
-      objectReference: {fileID: 0}
-    - target: {fileID: 6316992234854577062, guid: b1c977f592b73d5489b4d8a9e0c01040, type: 3}
-      propertyPath: m_Name
-      value: LeftSquare
-      objectReference: {fileID: 0}
-    - target: {fileID: 6327636865472011254, guid: b1c977f592b73d5489b4d8a9e0c01040, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 8.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 6327636865472011254, guid: b1c977f592b73d5489b4d8a9e0c01040, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 8.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 6327636865472011254, guid: b1c977f592b73d5489b4d8a9e0c01040, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6775301192886355417, guid: b1c977f592b73d5489b4d8a9e0c01040, type: 3}
-      propertyPath: m_Name
-      value: TopSquare
-      objectReference: {fileID: 0}
-    - target: {fileID: 6795858035386404267, guid: b1c977f592b73d5489b4d8a9e0c01040, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8796022655474147409, guid: b1c977f592b73d5489b4d8a9e0c01040, type: 3}
-      propertyPath: m_Name
-      value: BottomSquare
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1c977f592b73d5489b4d8a9e0c01040, type: 3}

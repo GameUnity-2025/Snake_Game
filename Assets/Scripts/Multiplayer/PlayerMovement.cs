@@ -117,6 +117,10 @@ public class PlayerMovement : MonoBehaviour
                 newDirection = Vector3.right;
         }
     }
+    public void SpeedUp()
+    {
+        timeStep = timeStep / 2;
+    }
     public Transform[] GetBodiesTransform()
     {
         bodies = GetComponentsInChildren<Transform>();

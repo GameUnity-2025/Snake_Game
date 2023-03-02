@@ -47,6 +47,13 @@ public class CollectiblesController : MonoBehaviour
         Vector3 newPos = new Vector3(newX, newY, 0f);
         GameObject newFood = Instantiate(foodPrefab, newPos, Quaternion.identity);
         newFood.transform.parent = FoodSection;
+        StartCoroutine(DestroySpawnedFood(newFood));
+    }
+    IEnumerator DestroySpawnedFood(GameObject food)
+    {
+        yield return new WaitForSeconds(Random.Range(5, 11));
+        if (food != null)
+            Destroy(food);
     }
     public void SpawnPowerUp(List<Transform> playerbodies)
     {

@@ -7,6 +7,10 @@ public class MultiplayerManager : MonoBehaviour
     [SerializeField] MPCanvas canvas;
     [SerializeField] CollectiblesController collectibles;
     [SerializeField] int powerUpCooldownTimer = 3;
+    [SerializeField] int gainerFoodScore = 20;
+    [SerializeField] int burnerFoodScore = 10;
+    [SerializeField] int lengthIncreasePerGainer = 1;
+    [SerializeField] int lengthDecreasePerBurner = 1;
     int[] multipliers;
     int[] scores;
     void Start()
@@ -20,15 +24,23 @@ public class MultiplayerManager : MonoBehaviour
         }
         canvas.UpdateScore(scores);
         List<Transform> playerBodyTransforms = GetPlayerBodyTransforms();
-        collectibles.SpawnFood(playerBodyTransforms);
+        StartCoroutine(SpawnFood());
         StartCoroutine(SpawnPowerUp());
     }
     IEnumerator SpawnPowerUp()
     {
         while (true)
         {
-            collectibles.SpawnPowerUp(GetPlayerBodyTransforms());
             yield return new WaitForSeconds(Random.Range(5, 16));
+            collectibles.SpawnPowerUp(GetPlayerBodyTransforms());
+        }
+    }
+    IEnumerator SpawnFood()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(Random.Range(5, 10));
+            collectibles.SpawnFood(GetPlayerBodyTransforms());
         }
     }
     List<Transform> GetPlayerBodyTransforms()
@@ -49,19 +61,20 @@ public class MultiplayerManager : MonoBehaviour
             {
                 if (_foodType == FoodType.Gainer || players[i].GetPlayerLength() < 6)
                 {
-                    players[i].AddBody();
-                    scores[i] += 10 * multipliers[i];
+                    for (int j = 0; j < lengthIncreasePerGainer; j++)
+                        players[i].AddBody();
+                    scores[i] += gainerFoodScore * multipliers[i];
                 }
                 else
                 {
-                    players[i].RemoveBody();
-                    scores[i] -= 10;
+                    for (int j = 0; j < lengthIncreasePerGainer; j++)
+                        players[i].RemoveBody();
+                    scores[i] -= burnerFoodScore;
                 }
                 break;
             }
         }
         canvas.UpdateScore(scores);
-        collectibles.SpawnFood(GetPlayerBodyTransforms());
     }
     public void PowerUpConsumed(Player _player, PowerUpType _powerUpType)
     {
