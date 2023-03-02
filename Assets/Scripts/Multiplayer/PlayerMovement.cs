@@ -31,7 +31,6 @@ public class PlayerMovement : MonoBehaviour
             newDirection = Vector3.left;
         bodies = GetComponentsInChildren<Transform>();
         length = bodies.Length;
-        Debug.Log(length);
         if (length < 1)
         {
             Debug.LogError("No body segments found");
@@ -130,13 +129,9 @@ public class PlayerMovement : MonoBehaviour
     }
     IEnumerator AddBodyWaiter()
     {
-        Vector3 currentDirection = newDirection;
-        // Debug.Log("Time to wait : " + (timeStep * (length - 1)));
-        // Debug.Log(Time.time);
+        Vector3 currentHeadPos = bodies[1].position;
         yield return new WaitForSeconds(timeStep * (length - 1));
-        // Debug.Log(Time.time);
-        Vector3 oldPos = bodies[length - 1].position;
-        GameObject newBody = Instantiate(bodyPrefab, oldPos + new Vector3(step * currentDirection.x, step * currentDirection.y, 0), Quaternion.identity);
+        GameObject newBody = Instantiate(bodyPrefab, currentHeadPos, Quaternion.identity);
         newBody.transform.parent = this.transform;
         newBody.transform.SetAsLastSibling();
         length++;
@@ -171,7 +166,7 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator SpeedBoost(int timer)
     {
         float oldTimeStep = timeStep;
-        timeStep = timeStep * 2;
+        timeStep = timeStep / 2;
         yield return new WaitForSeconds(timer);
         timeStep = oldTimeStep;
     }

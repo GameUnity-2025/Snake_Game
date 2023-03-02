@@ -48,37 +48,31 @@ public class CollectiblesController : MonoBehaviour
         GameObject newFood = Instantiate(foodPrefab, newPos, Quaternion.identity);
         newFood.transform.parent = FoodSection;
     }
-    public IEnumerator SpawnPowerUp(List<Transform> playerbodies, int timer)
+    public void SpawnPowerUp(List<Transform> playerbodies)
     {
-        Debug.Log(playerbodies.Count);
         playerbodies.AddRange(GetFoodTransforms());
-        Debug.Log(playerbodies.Count);
         powerFlag = false;
-        while (true)
+        do
         {
-            do
+            powerFlag = false;
+            newX2 = Random.Range(minX, maxX);
+            newY2 = Random.Range(minY, maxY);
+
+            newX2 = Mathf.Round(newX2 * 2) / 2;
+            newY2 = Mathf.Round(newY2 * 2) / 2;
+
+            foreach (var item in playerbodies)
             {
-                powerFlag = false;
-                newX2 = Random.Range(minX, maxX);
-                newY2 = Random.Range(minY, maxY);
-
-                newX2 = Mathf.Round(newX2 * 2) / 2;
-                newY2 = Mathf.Round(newY2 * 2) / 2;
-
-                foreach (var item in playerbodies)
+                if (item.position.x == newX2 || item.position.y == newY2)
                 {
-                    if (item.position.x == newX2 || item.position.y == newY2)
-                    {
-                        powerFlag = true;
-                        break;
-                    }
+                    powerFlag = true;
+                    break;
                 }
-            } while (powerFlag);
-            Vector3 newPos = new Vector3(newX2, newY2, 0f);
-            GameObject newPower = Instantiate(powerUpPrefab, newPos, Quaternion.identity);
-            newPower.transform.parent = PowerUpSection;
-            yield return new WaitForSeconds(timer);
-        }
+            }
+        } while (powerFlag);
+        Vector3 newPos = new Vector3(newX2, newY2, 0f);
+        GameObject newPower = Instantiate(powerUpPrefab, newPos, Quaternion.identity);
+        newPower.transform.parent = PowerUpSection;
     }
     List<Transform> GetFoodTransforms()
     {

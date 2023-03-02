@@ -21,7 +21,15 @@ public class MultiplayerManager : MonoBehaviour
         canvas.UpdateScore(scores);
         List<Transform> playerBodyTransforms = GetPlayerBodyTransforms();
         collectibles.SpawnFood(playerBodyTransforms);
-        StartCoroutine(collectibles.SpawnPowerUp(playerBodyTransforms, powerUpCooldownTimer));
+        StartCoroutine(SpawnPowerUp());
+    }
+    IEnumerator SpawnPowerUp()
+    {
+        while (true)
+        {
+            collectibles.SpawnPowerUp(GetPlayerBodyTransforms());
+            yield return new WaitForSeconds(Random.Range(5, 16));
+        }
     }
     List<Transform> GetPlayerBodyTransforms()
     {
@@ -70,6 +78,7 @@ public class MultiplayerManager : MonoBehaviour
                 players[i].PowerUp(_powerUpType, powerUpCooldownTimer);
             }
         }
+        canvas.PowerUpModifier(_player, _powerUpType, powerUpCooldownTimer);
     }
     IEnumerator DoubleScore(int index)
     {
@@ -90,7 +99,7 @@ public class MultiplayerManager : MonoBehaviour
     {
         AudioManager.Instance.PlaySound(SoundType.GameOver);
         Time.timeScale = 0;
-        canvas.GameOverUI(scores);
+        canvas.GameOverUI(scores, player);
     }
     public void MainMenu()
     {
