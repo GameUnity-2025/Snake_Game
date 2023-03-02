@@ -12,8 +12,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float step = 0.5f;
     [SerializeField] GameObject bodyPrefab;
     [SerializeField] Transform[] bodies;
-    [SerializeField] Player player;
+    [SerializeField] public Player player;
     int length;
+    float newX, newY;
+    [SerializeField] float minX;
+    [SerializeField] float maxX;
+    [SerializeField] float minY;
+    [SerializeField] float maxY;
     void Awake()
     {
         length = -1;
@@ -42,11 +47,11 @@ public class PlayerMovement : MonoBehaviour
             {
                 oldPositions[i] = bodies[i].position;
             }
-
             headPos = oldPositions[1];
-            headPos += new Vector3(step * newDirection.x, step * newDirection.y, 0);
+            newX = step * newDirection.x;
+            newY = step * newDirection.y;
+            headPos += new Vector3(newX * WrapSnakeX(newX + headPos.x), newY * WrapSnakeY(newY + headPos.y), 0);
             bodies[1].position = headPos;
-
             for (int i = 2; i < length; i++)
             {
                 if (bodies[i] != null && oldPositions[i - 1] != null)
@@ -55,9 +60,37 @@ public class PlayerMovement : MonoBehaviour
             yield return new WaitForSeconds(timeStep);
         }
     }
+    float WrapSnakeX(float newX)
+    {
+        if (newX > maxX)
+        {
+            return -2 * 2 * maxX;
+        }
+        if (newX < minX)
+        {
+            return 2 * 2 * minX;
+        }
+        return 1;
+    }
+    float WrapSnakeY(float newY)
+    {
+        if (newY > maxY)
+        {
+            return (-2 * 2 * maxY) - 2;
+        }
+        if (newY < minY)
+        {
+            return (2 * 2 * minY) + 2;
+        }
+        return 1;
+    }
     void MoveBody(int index, Vector3 prevPos)
     {
         bodies[index].transform.position = prevPos;
+    }
+    public int GetPlayerLength()
+    {
+        return length;
     }
     void Update()
     {
@@ -84,6 +117,10 @@ public class PlayerMovement : MonoBehaviour
                 newDirection = Vector3.right;
         }
     }
+    public void SpeedUp()
+    {
+        timeStep = timeStep / 2;
+    }
     public Transform[] GetBodiesTransform()
     {
         bodies = GetComponentsInChildren<Transform>();
@@ -96,16 +133,45 @@ public class PlayerMovement : MonoBehaviour
     }
     IEnumerator AddBodyWaiter()
     {
-        Vector3 currentDirection = newDirection;
-        Debug.Log("Time to wait : " + (timeStep * (length - 1)));
-        Debug.Log(Time.time);
+        Vector3 currentHeadPos = bodies[1].position;
         yield return new WaitForSeconds(timeStep * (length - 1));
-        Debug.Log(Time.time);
-        Vector3 oldPos = bodies[length - 1].position;
-        GameObject newBody = Instantiate(bodyPrefab, oldPos + new Vector3(step * currentDirection.x, step * currentDirection.y, 0), Quaternion.identity);
+        GameObject newBody = Instantiate(bodyPrefab, currentHeadPos, Quaternion.identity);
         newBody.transform.parent = this.transform;
         newBody.transform.SetAsLastSibling();
         length++;
         bodies = GetComponentsInChildren<Transform>();
+    }
+    public void RemoveBody()
+    {
+        Destroy(bodies[length - 1].gameObject);
+        length--;
+        bodies = GetComponentsInChildren<Transform>();
+    }
+    public void PowerUp(PowerUpType powerUpType, int timer)
+    {
+        switch (powerUpType)
+        {
+            case PowerUpType.SpeedBoost:
+                StartCoroutine(SpeedBoost(timer));
+                break;
+            case PowerUpType.Shield:
+                StartCoroutine(ShieldEnable(timer));
+                break;
+            default: break;
+        }
+    }
+    IEnumerator ShieldEnable(int timer)
+    {
+        MPBody headBody = bodies[1].GetComponent<MPBody>();
+        headBody.TriggerShield();
+        yield return new WaitForSeconds(timer);
+        headBody.TriggerShield();
+    }
+    IEnumerator SpeedBoost(int timer)
+    {
+        float oldTimeStep = timeStep;
+        timeStep = timeStep / 2;
+        yield return new WaitForSeconds(timer);
+        timeStep = oldTimeStep;
     }
 }
