@@ -168,10 +168,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodPrefab: {fileID: 4346433629021717129, guid: 4008ad83c45108243923752f01436a63, type: 3}
+  powerUpPrefab: {fileID: 0}
   LeftBorder: {fileID: 2006844503}
   RightBorder: {fileID: 900849975}
   TopBorder: {fileID: 586758626}
   BottomBorder: {fileID: 711391421}
+  FoodSection: {fileID: 0}
+  PowerUpSection: {fileID: 0}
 --- !u!1 &61544273
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,17 +386,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 103094239}
   m_CullTransparentMesh: 1
---- !u!114 &134117319 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1501821702206135136, guid: e882198a291eccc4e94454ba1739f27a, type: 3}
-  m_PrefabInstance: {fileID: 1501821702207073447}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe90b14ebbbcb794cb813e86cea1291f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &167368178
 GameObject:
   m_ObjectHideFlags: 0
@@ -1470,9 +1462,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe28c46c5d5fcc64aaa32dc15021ba6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  snake: {fileID: 134117319}
-  canvas: {fileID: 1090495205}
-  collectibles: {fileID: 15433521}
 --- !u!4 &788302332
 Transform:
   m_ObjectHideFlags: 0
@@ -1849,10 +1838,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 087d3b22172e0af48a8c2a2c3138d019, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 1443107350}
-  gameOverUI: {fileID: 1122108233}
-  gameOverScore: {fileID: 302481987}
-  pauseScreenUI: {fileID: 378189972}
 --- !u!1 &1122108233
 GameObject:
   m_ObjectHideFlags: 0
@@ -1961,8 +1946,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4282580806
-  m_fontColor: {r: 0.27450982, g: 1, b: 0.25882354, a: 1}
+    rgba: 4282535679
+  m_fontColor: {r: 1, g: 0.3057653, b: 0.2588235, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2356,8 +2341,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4282580806
-  m_fontColor: {r: 0.27450982, g: 1, b: 0.25882354, a: 1}
+    rgba: 4285958006
+  m_fontColor: {r: 0.46325523, g: 0.5283019, b: 0.4618488, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3935,8 +3920,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4282580806
-  m_fontColor: {r: 0.27450982, g: 1, b: 0.25882354, a: 1}
+    rgba: 4282571007
+  m_fontColor: {r: 1, g: 0.8480666, b: 0.2588235, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
