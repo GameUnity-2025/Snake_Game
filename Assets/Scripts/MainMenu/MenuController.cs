@@ -7,7 +7,12 @@ public class MenuController : MonoBehaviour
     public void StartClicked()
     {
         AudioManager.Instance.PlaySound(SoundType.Button);
-        MainMenu.alpha = 0.5f;
+
+        // Ẩn settings menu nếu đang mở
+        if (SettingsMenu.activeInHierarchy)
+            SettingsMenu.SetActive(false);
+
+        MainMenu.alpha = 0f;
         MainMenu.interactable = false;
         if (!PlayMenu.activeInHierarchy)
             PlayMenu.SetActive(true);
@@ -15,7 +20,12 @@ public class MenuController : MonoBehaviour
     public void SettingsClicked()
     {
         AudioManager.Instance.PlaySound(SoundType.Button);
-        MainMenu.alpha = 0.5f;
+
+        // Ẩn play menu nếu đang mở
+        if (PlayMenu.activeInHierarchy)
+            PlayMenu.SetActive(false);
+
+        MainMenu.alpha = 0f;
         MainMenu.interactable = false;
         if (!SettingsMenu.activeInHierarchy)
             SettingsMenu.SetActive(true);
