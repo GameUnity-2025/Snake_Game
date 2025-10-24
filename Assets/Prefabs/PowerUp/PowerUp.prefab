@@ -155,6 +155,8 @@ MonoBehaviour:
   shieldImg: {fileID: -1794729541621063415, guid: c902e8f02c7f18347ae52d5c49bd19d7, type: 3}
   multiplierImg: {fileID: 31452814797251248, guid: 8c6cc52ad0b6be64791c98ac5601d17e, type: 3}
   speedBoostImg: {fileID: -6528272944296969137, guid: 7068d65bce7eaa04696d6a0bf30cb31b, type: 3}
+  boomImg: {fileID: 7944970601248418513, guid: 10a830def5607094ab8117cb0f6b9988, type: 3}
   shieldScale: {x: 0.13, y: 0.13}
   multiplierScale: {x: 0.2, y: 0.2}
   speedBoostScale: {x: 0.2, y: 0.2}
+  boomScale: {x: 0.25, y: 0.25}
