@@ -67,7 +67,7 @@ public class MultiplayerManager : MonoBehaviour
                 }
                 else
                 {
-                    for (int j = 0; j < lengthIncreasePerGainer; j++)
+                    for (int j = 0; j < lengthDecreasePerBurner; j++)
                         players[i].RemoveBody();
                     scores[i] -= burnerFoodScore;
                 }
