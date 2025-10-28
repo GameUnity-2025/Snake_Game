@@ -24,7 +24,16 @@ public class MPBody : MonoBehaviour
                 Destroy(col.gameObject);
                 break;
             case "PowerUp":
-                gameManager.PowerUpConsumed(player, col.GetComponent<PowerUpController>().powerUpType);
+                PowerUpType powerUpType = col.GetComponent<PowerUpController>().powerUpType;
+                if (powerUpType == PowerUpType.Boom)
+                {
+                    Debug.Log("Boom powerup hit! Game Over!");
+                    gameManager.GameOver(player);
+                }
+                else
+                {
+                    gameManager.PowerUpConsumed(player, powerUpType);
+                }
                 Destroy(col.gameObject);
                 break;
             default: break;
