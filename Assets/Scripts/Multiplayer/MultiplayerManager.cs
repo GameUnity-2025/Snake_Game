@@ -67,9 +67,11 @@ public class MultiplayerManager : MonoBehaviour
                 }
                 else
                 {
+                    // Burner effect: remove body if applicable, but do NOT subtract score anymore
                     for (int j = 0; j < lengthDecreasePerBurner; j++)
                         players[i].RemoveBody();
-                    scores[i] -= burnerFoodScore;
+                    // previously: scores[i] -= burnerFoodScore;
+                    // Negative scoring removed per user request
                 }
                 break;
             }

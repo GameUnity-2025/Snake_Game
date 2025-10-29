@@ -46,6 +46,13 @@ public class CollectiblesController : MonoBehaviour
         } while (foodFlag);
         Vector3 newPos = new Vector3(newX, newY, 0f);
         GameObject newFood = Instantiate(foodPrefab, newPos, Quaternion.identity);
+        // Ensure it is always a Gainer (remove negative-scoring food from spawn pool)
+        var fc = newFood.GetComponent<FoodController>();
+        if (fc != null)
+        {
+            fc.foodType = FoodType.Gainer;
+            fc.ApplyVisuals();
+        }
         newFood.transform.parent = FoodSection;
         StartCoroutine(DestroySpawnedFood(newFood));
     }
