@@ -4,6 +4,7 @@ public class MenuController : MonoBehaviour
     [SerializeField] CanvasGroup MainMenu;
     [SerializeField] GameObject PlayMenu;
     [SerializeField] GameObject SettingsMenu;
+    [SerializeField] GameObject HowToPlayMenu;
     public void StartClicked()
     {
         AudioManager.Instance.PlaySound(SoundType.Button);
@@ -39,6 +40,8 @@ public class MenuController : MonoBehaviour
             SettingsMenu.SetActive(false);
         if (PlayMenu.activeInHierarchy)
             PlayMenu.SetActive(false);
+        if (HowToPlayMenu.activeInHierarchy)
+            HowToPlayMenu.SetActive(false);
     }
     public void SinglePlayer()
     {
@@ -54,6 +57,21 @@ public class MenuController : MonoBehaviour
     {
         AudioManager.Instance.PlaySound(SoundType.Button);
         LevelManager.Instance.QuitGame();
+    }
+    public void HowToPlayClicked()
+    {
+        AudioManager.Instance.PlaySound(SoundType.Button);
+
+        // Ẩn các menu khác nếu đang mở
+        if (PlayMenu.activeInHierarchy)
+            PlayMenu.SetActive(false);
+        if (SettingsMenu.activeInHierarchy)
+            SettingsMenu.SetActive(false);
+
+        MainMenu.alpha = 0f;
+        MainMenu.interactable = false;
+        if (!HowToPlayMenu.activeInHierarchy)
+            HowToPlayMenu.SetActive(true);
     }
     public void SetSfxVolume(float _volume)
     {
