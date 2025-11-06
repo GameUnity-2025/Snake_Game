@@ -8,7 +8,9 @@ public class MultiplayerManager : MonoBehaviour
     [SerializeField] CollectiblesController collectibles;
     [SerializeField] int powerUpCooldownTimer = 3;
     [SerializeField] int gainerFoodScore = 20;
+#pragma warning disable CS0414 // Field is assigned but never used - kept for potential future use
     [SerializeField] int burnerFoodScore = 10;
+#pragma warning restore CS0414
     [SerializeField] int lengthIncreasePerGainer = 1;
     [SerializeField] int lengthDecreasePerBurner = 1;
     int[] multipliers;
